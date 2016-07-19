@@ -15,4 +15,9 @@
       http://www.springframework.org/schema/tx
       http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
+    <!-- 使用spring的基于cgLib的动态代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <mvc:annotation-driven/>
+
+
 </beans>
