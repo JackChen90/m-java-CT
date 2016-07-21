@@ -15,25 +15,25 @@ import java.util.Date;
  * @see [相关类/方法]
  * @since [产品/模块版本]
  */
-public class RunLog
+public class RunLogDemo
 {
     
     private static final Log loggerInfo = LogFactory.getLog("RUN");
     
-    private RunLog()
+    private RunLogDemo()
     {
     }
     
-    private static RunLog runLog = null;
+    private static RunLogDemo runLog = null;
     
     //静态工厂方法   
-    public static RunLog getInstance()
+    public static RunLogDemo getInstance()
     {
-        synchronized (RunLog.class)
+        synchronized (RunLogDemo.class)
         {
             if (runLog == null)
             {
-                runLog = new RunLog();
+                runLog = new RunLogDemo();
             }
         }
         return runLog;

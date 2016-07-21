@@ -154,6 +154,18 @@
       <artifactId>gson</artifactId>
       <version>2.4</version>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!-- log4j -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
 
   </dependencies>
 
@@ -166,6 +178,9 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>9.2.1.v20140609</version>
         <configuration>
+          <webApp>
+            <contextPath>/m-java-ct</contextPath>
+          </webApp>
           <httpConnector>
             <port>80</port>
           </httpConnector>
