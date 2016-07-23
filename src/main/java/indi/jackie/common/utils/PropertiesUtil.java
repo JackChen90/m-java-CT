@@ -70,13 +70,13 @@ public class PropertiesUtil {
                 map.put(key, value == null ? "" : value.trim());
             }
         } catch (IOException ie) {
-            RunLogDemo.getInstance().error("Failed to read the configuration file","InnerErrorDesc=" + ie.getMessage(),"gulu-web");
+            RunLog.getInstance().error("Failed to read the configuration file","InnerErrorDesc=" + ie.getMessage(),"gulu-web");
         } finally {
             if (is != null) {
                 try {
                     is.close();
                 } catch (IOException ie) {
-                    RunLogDemo.getInstance().error("Failed to read the configuration file", "InnerErrorDesc=" + ie.getMessage(),"gulu-web");
+                    RunLog.getInstance().error("Failed to read the configuration file", "InnerErrorDesc=" + ie.getMessage(),"gulu-web");
                 }
             }
         }
@@ -105,13 +105,13 @@ public class PropertiesUtil {
                 map.put(key, value == null ? "" : value.trim());
             }
         } catch (IOException ie) {
-            RunLogDemo.getInstance().error("Failed to read the configuration file", "InnerErrorDesc=" + ie.getMessage(),"gulu-web");
+            RunLog.getInstance().error("Failed to read the configuration file", "InnerErrorDesc=" + ie.getMessage(),"gulu-web");
         } finally {
             if (is != null) {
                 try {
                     is.close();
                 } catch (IOException ie) {
-                    RunLogDemo.getInstance().error("Failed to read the configuration file","InnerErrorDesc=" +  ie.getMessage(),"gulu-web");
+                    RunLog.getInstance().error("Failed to read the configuration file","InnerErrorDesc=" +  ie.getMessage(),"gulu-web");
                 }
             }
         }

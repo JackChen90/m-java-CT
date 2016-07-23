@@ -3,6 +3,7 @@ package indi.jackie.wechat.controller;
 
 import com.google.gson.Gson;
 import indi.jackie.common.utils.PropertiesUtil;
+import indi.jackie.common.utils.RunLog;
 import indi.jackie.common.wechat.AesException;
 import indi.jackie.common.wechat.SHA1;
 import indi.jackie.wechat.entity.ErrorModel;
@@ -21,7 +22,6 @@ import java.io.PrintWriter;
  * @create 2016/7/15
  * @description 基础Controller
  */
-
 @Controller
 public class BaseController {
 
@@ -50,6 +50,9 @@ public class BaseController {
             code = ((AesException) e).getCode();
             errMessage = e.getMessage();
         }
+        RunLog.getInstance().info("Exception occur",
+                String.format("exception parameters: code={0},errMessage={1}", code, errMessage),
+                "m-java-CT");
         return createFailJson(code, errMessage);
     }
 
@@ -84,13 +87,25 @@ public class BaseController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
-    public String verifyWeChatAPI(HttpServletResponse response, String signature, String timestamp, String nonce, String echostr) throws AesException, IOException {
+    public String verifyWeChatAPI(String signature, String timestamp, String nonce, String echostr) throws AesException, IOException {
         //校验signature
         if (null != signature && signature.equals(SHA1.getSHA1(OFFICIAL_ACCOUNT_TOKEN, timestamp, nonce))) {
+            RunLog.getInstance().info("wechat server judge success",
+                    String.format("signature=%s,timestamp=%s,nonce=%s,echostr=%s", signature, timestamp, nonce, echostr),
+                    "m-java-CT");
             return echostr;
         }
         //校验失败则返回error
+        RunLog.getInstance().error("wechat server judge fail",
+                String.format("signature=%s,timestamp=%s,nonce=%s,echostr=%s", signature, timestamp, nonce, echostr),
+                "m-java-CT");
         return "error";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String processMessage(){
+
+        return "";
     }
 
 }

@@ -3,7 +3,7 @@ package indi.jackie.common.utils;
 /**
  * @author jackie chen
  * @create 2016/7/17
- * @description 基础Controller
+ * @description String工具类
  */
 public class StringUtils {
 
