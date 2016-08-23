@@ -85,7 +85,7 @@ public class BaseController {
      * @param echostr   随机字符串
      * @return echostr 回应报文
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", produces = "text/html;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public String verifyWeChatAPI(String signature, String timestamp, String nonce, String echostr) throws AesException, IOException {
         //校验signature
@@ -102,10 +102,10 @@ public class BaseController {
         return "error";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String processMessage(){
+    @RequestMapping(value = "/", produces = "application/xml;charset=UTF-8", method = RequestMethod.POST)
+    @ResponseBody
+    public String processMessage() {
 
         return "";
     }
-
 }

@@ -18,4 +18,51 @@ public class StringUtils {
         }
         return false;
     }
+
+    /**
+     * 去除两端空格
+     * @param target
+     * @return
+     */
+    public static String trimWhitespace(String target) {
+        if(isEmpty(target)) {
+            return target;
+        } else {
+            StringBuilder sb = new StringBuilder(target);
+
+            while(sb.length() > 0 && Character.isWhitespace(sb.charAt(0))) {
+                sb.deleteCharAt(0);
+            }
+
+            while(sb.length() > 0 && Character.isWhitespace(sb.charAt(sb.length() - 1))) {
+                sb.deleteCharAt(sb.length() - 1);
+            }
+
+            return sb.toString();
+        }
+    }
+
+    /**
+     * 去除所有空格
+     * @param target
+     * @return
+     */
+    public static String trimAllWhitespace(String target) {
+        if(isEmpty(target)) {
+            return target;
+        } else {
+            StringBuilder sb = new StringBuilder(target);
+            int index = 0;
+
+            while(sb.length() > index) {
+                if(Character.isWhitespace(sb.charAt(index))) {
+                    sb.deleteCharAt(index);
+                } else {
+                    ++index;
+                }
+            }
+
+            return sb.toString();
+        }
+    }
 }
