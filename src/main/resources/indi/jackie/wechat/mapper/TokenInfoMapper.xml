@@ -1,38 +1,46 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="indi.jackie.wechat.dao.TokenInfoMapper" >
-  <resultMap id="BaseResultMap" type="indi.jackie.wechat.entity.TokenInfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="app_id" property="appId" jdbcType="VARCHAR" />
-    <result column="app_secret" property="appSecret" jdbcType="VARCHAR" />
-    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
-    <result column="jsapi_ticket" property="jsapiTicket" jdbcType="VARCHAR" />
-    <result column="app_name" property="appName" jdbcType="VARCHAR" />
-    <result column="qrcode_image_url" property="qrcodeImageUrl" jdbcType="VARCHAR" />
-    <result column="wechat_code" property="wechatCode" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="indi.jackie.wechat.entity.TokenInfo" extends="BaseResultMap" >
-    <result column="qrcode_image" property="qrcodeImage" jdbcType="LONGVARBINARY" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="indi.jackie.wechat.dao.TokenInfoMapper">
+    <resultMap id="BaseResultMap" type="indi.jackie.wechat.entity.TokenInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="app_code" jdbcType="VARCHAR" property="appCode"/>
+        <result column="app_id" jdbcType="VARCHAR" property="appId"/>
+        <result column="app_secret" jdbcType="VARCHAR" property="appSecret"/>
+        <result column="access_token" jdbcType="VARCHAR" property="accessToken"/>
+        <result column="jsapi_ticket" jdbcType="VARCHAR" property="jsapiTicket"/>
+        <result column="app_name" jdbcType="VARCHAR" property="appName"/>
+        <result column="qrcode_image_url" jdbcType="VARCHAR" property="qrcodeImageUrl"/>
+        <result column="wechat_origin_id" jdbcType="VARCHAR" property="wechatOriginId"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="indi.jackie.wechat.entity.TokenInfo">
+        <result column="qrcode_image" jdbcType="LONGVARBINARY" property="qrcodeImage"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, app_id, app_secret, access_token, jsapi_ticket, app_name, qrcode_image_url, wechat_code
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
     qrcode_image
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from w_token_info
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from w_token_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getTokenInfoList" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from w_token_info
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from w_token_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="indi.jackie.wechat.entity.TokenInfo" >
+    <insert id="insert" parameterType="indi.jackie.wechat.entity.TokenInfo">
     insert into w_token_info (id, app_id, app_secret, 
       access_token, jsapi_ticket, app_name, 
       qrcode_image_url, wechat_code, qrcode_image
@@ -42,98 +50,98 @@
       #{qrcodeImageUrl,jdbcType=VARCHAR}, #{wechatCode,jdbcType=VARCHAR}, #{qrcodeImage,jdbcType=LONGVARBINARY}
       )
   </insert>
-  <insert id="insertSelective" parameterType="indi.jackie.wechat.entity.TokenInfo" >
-    insert into w_token_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="appId != null" >
-        app_id,
-      </if>
-      <if test="appSecret != null" >
-        app_secret,
-      </if>
-      <if test="accessToken != null" >
-        access_token,
-      </if>
-      <if test="jsapiTicket != null" >
-        jsapi_ticket,
-      </if>
-      <if test="appName != null" >
-        app_name,
-      </if>
-      <if test="qrcodeImageUrl != null" >
-        qrcode_image_url,
-      </if>
-      <if test="wechatCode != null" >
-        wechat_code,
-      </if>
-      <if test="qrcodeImage != null" >
-        qrcode_image,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="appId != null" >
-        #{appId,jdbcType=VARCHAR},
-      </if>
-      <if test="appSecret != null" >
-        #{appSecret,jdbcType=VARCHAR},
-      </if>
-      <if test="accessToken != null" >
-        #{accessToken,jdbcType=VARCHAR},
-      </if>
-      <if test="jsapiTicket != null" >
-        #{jsapiTicket,jdbcType=VARCHAR},
-      </if>
-      <if test="appName != null" >
-        #{appName,jdbcType=VARCHAR},
-      </if>
-      <if test="qrcodeImageUrl != null" >
-        #{qrcodeImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="wechatCode != null" >
-        #{wechatCode,jdbcType=VARCHAR},
-      </if>
-      <if test="qrcodeImage != null" >
-        #{qrcodeImage,jdbcType=LONGVARBINARY},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="indi.jackie.wechat.entity.TokenInfo" >
-    update w_token_info
-    <set >
-      <if test="appId != null" >
-        app_id = #{appId,jdbcType=VARCHAR},
-      </if>
-      <if test="appSecret != null" >
-        app_secret = #{appSecret,jdbcType=VARCHAR},
-      </if>
-      <if test="accessToken != null" >
-        access_token = #{accessToken,jdbcType=VARCHAR},
-      </if>
-      <if test="jsapiTicket != null" >
-        jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
-      </if>
-      <if test="appName != null" >
-        app_name = #{appName,jdbcType=VARCHAR},
-      </if>
-      <if test="qrcodeImageUrl != null" >
-        qrcode_image_url = #{qrcodeImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="wechatCode != null" >
-        wechat_code = #{wechatCode,jdbcType=VARCHAR},
-      </if>
-      <if test="qrcodeImage != null" >
-        qrcode_image = #{qrcodeImage,jdbcType=LONGVARBINARY},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="indi.jackie.wechat.entity.TokenInfo" >
+    <insert id="insertSelective" parameterType="indi.jackie.wechat.entity.TokenInfo">
+        insert into w_token_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="appSecret != null">
+                app_secret,
+            </if>
+            <if test="accessToken != null">
+                access_token,
+            </if>
+            <if test="jsapiTicket != null">
+                jsapi_ticket,
+            </if>
+            <if test="appName != null">
+                app_name,
+            </if>
+            <if test="qrcodeImageUrl != null">
+                qrcode_image_url,
+            </if>
+            <if test="wechatCode != null">
+                wechat_code,
+            </if>
+            <if test="qrcodeImage != null">
+                qrcode_image,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appSecret != null">
+                #{appSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="accessToken != null">
+                #{accessToken,jdbcType=VARCHAR},
+            </if>
+            <if test="jsapiTicket != null">
+                #{jsapiTicket,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null">
+                #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeImageUrl != null">
+                #{qrcodeImageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatCode != null">
+                #{wechatCode,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeImage != null">
+                #{qrcodeImage,jdbcType=LONGVARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="indi.jackie.wechat.entity.TokenInfo">
+        update w_token_info
+        <set>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appSecret != null">
+                app_secret = #{appSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="accessToken != null">
+                access_token = #{accessToken,jdbcType=VARCHAR},
+            </if>
+            <if test="jsapiTicket != null">
+                jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null">
+                app_name = #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeImageUrl != null">
+                qrcode_image_url = #{qrcodeImageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatCode != null">
+                wechat_code = #{wechatCode,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeImage != null">
+                qrcode_image = #{qrcodeImage,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="indi.jackie.wechat.entity.TokenInfo">
     update w_token_info
     set app_id = #{appId,jdbcType=VARCHAR},
       app_secret = #{appSecret,jdbcType=VARCHAR},
@@ -145,7 +153,7 @@
       qrcode_image = #{qrcodeImage,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="indi.jackie.wechat.entity.TokenInfo" >
+    <update id="updateByPrimaryKey" parameterType="indi.jackie.wechat.entity.TokenInfo">
     update w_token_info
     set app_id = #{appId,jdbcType=VARCHAR},
       app_secret = #{appSecret,jdbcType=VARCHAR},

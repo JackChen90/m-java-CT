@@ -3,6 +3,8 @@ package indi.jackie.wechat.entity;
 public class TokenInfo {
     private Integer id;
 
+    private String appCode;
+
     private String appId;
 
     private String appSecret;
@@ -15,7 +17,7 @@ public class TokenInfo {
 
     private String qrcodeImageUrl;
 
-    private String wechatCode;
+    private String wechatOriginId;
 
     private byte[] qrcodeImage;
 
@@ -25,6 +27,14 @@ public class TokenInfo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAppCode() {
+        return appCode;
+    }
+
+    public void setAppCode(String appCode) {
+        this.appCode = appCode == null ? null : appCode.trim();
     }
 
     public String getAppId() {
@@ -75,12 +85,12 @@ public class TokenInfo {
         this.qrcodeImageUrl = qrcodeImageUrl == null ? null : qrcodeImageUrl.trim();
     }
 
-    public String getWechatCode() {
-        return wechatCode;
+    public String getWechatOriginId() {
+        return wechatOriginId;
     }
 
-    public void setWechatCode(String wechatCode) {
-        this.wechatCode = wechatCode == null ? null : wechatCode.trim();
+    public void setWechatOriginId(String wechatOriginId) {
+        this.wechatOriginId = wechatOriginId == null ? null : wechatOriginId.trim();
     }
 
     public byte[] getQrcodeImage() {
