@@ -16,11 +16,11 @@
         <result column="qrcode_image" jdbcType="LONGVARBINARY" property="qrcodeImage"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, app_id, app_secret, access_token, jsapi_ticket, app_name, qrcode_image_url, wechat_code
-    </sql>
+    id, app_id, app_secret, access_token, jsapi_ticket, app_name, qrcode_image_url, wechat_code
+  </sql>
     <sql id="Blob_Column_List">
-        qrcode_image
-    </sql>
+    qrcode_image
+  </sql>
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -37,19 +37,19 @@
         from w_token_info
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from w_token_info
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
+    delete from w_token_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
     <insert id="insert" parameterType="indi.jackie.wechat.entity.TokenInfo">
-        insert into w_token_info (id, app_id, app_secret,
-        access_token, jsapi_ticket, app_name,
-        qrcode_image_url, wechat_code, qrcode_image
-        )
-        values (#{id,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR}, #{appSecret,jdbcType=VARCHAR},
-        #{accessToken,jdbcType=VARCHAR}, #{jsapiTicket,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR},
-        #{qrcodeImageUrl,jdbcType=VARCHAR}, #{wechatCode,jdbcType=VARCHAR}, #{qrcodeImage,jdbcType=LONGVARBINARY}
-        )
-    </insert>
+    insert into w_token_info (id, app_id, app_secret, 
+      access_token, jsapi_ticket, app_name, 
+      qrcode_image_url, wechat_code, qrcode_image
+      )
+    values (#{id,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR}, #{appSecret,jdbcType=VARCHAR}, 
+      #{accessToken,jdbcType=VARCHAR}, #{jsapiTicket,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+      #{qrcodeImageUrl,jdbcType=VARCHAR}, #{wechatCode,jdbcType=VARCHAR}, #{qrcodeImage,jdbcType=LONGVARBINARY}
+      )
+  </insert>
     <insert id="insertSelective" parameterType="indi.jackie.wechat.entity.TokenInfo">
         insert into w_token_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -142,26 +142,26 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="indi.jackie.wechat.entity.TokenInfo">
-        update w_token_info
-        set app_id = #{appId,jdbcType=VARCHAR},
-        app_secret = #{appSecret,jdbcType=VARCHAR},
-        access_token = #{accessToken,jdbcType=VARCHAR},
-        jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
-        app_name = #{appName,jdbcType=VARCHAR},
-        qrcode_image_url = #{qrcodeImageUrl,jdbcType=VARCHAR},
-        wechat_code = #{wechatCode,jdbcType=VARCHAR},
-        qrcode_image = #{qrcodeImage,jdbcType=LONGVARBINARY}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+    update w_token_info
+    set app_id = #{appId,jdbcType=VARCHAR},
+      app_secret = #{appSecret,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      qrcode_image_url = #{qrcodeImageUrl,jdbcType=VARCHAR},
+      wechat_code = #{wechatCode,jdbcType=VARCHAR},
+      qrcode_image = #{qrcodeImage,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
     <update id="updateByPrimaryKey" parameterType="indi.jackie.wechat.entity.TokenInfo">
-        update w_token_info
-        set app_id = #{appId,jdbcType=VARCHAR},
-        app_secret = #{appSecret,jdbcType=VARCHAR},
-        access_token = #{accessToken,jdbcType=VARCHAR},
-        jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
-        app_name = #{appName,jdbcType=VARCHAR},
-        qrcode_image_url = #{qrcodeImageUrl,jdbcType=VARCHAR},
-        wechat_code = #{wechatCode,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+    update w_token_info
+    set app_id = #{appId,jdbcType=VARCHAR},
+      app_secret = #{appSecret,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      jsapi_ticket = #{jsapiTicket,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      qrcode_image_url = #{qrcodeImageUrl,jdbcType=VARCHAR},
+      wechat_code = #{wechatCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
