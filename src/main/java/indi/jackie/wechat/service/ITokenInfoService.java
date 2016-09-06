@@ -1,7 +1,9 @@
 package indi.jackie.wechat.service;
 
+import indi.jackie.common.wechat.WeChatSQLException;
 import indi.jackie.wechat.entity.TokenInfo;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -15,12 +17,12 @@ public interface ITokenInfoService {
      *
      * @param tokenInfo token相关
      */
-    void updateWechatTokenInfo(TokenInfo tokenInfo);
+    void updateWechatTokenInfo(TokenInfo tokenInfo) throws WeChatSQLException;
 
     /**
      * 获取access token列表
      *
      * @return access token列表
      */
-    List<TokenInfo> getTokenInfoList();
+    List<TokenInfo> getTokenInfoList() throws WeChatSQLException;
 }

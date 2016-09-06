@@ -5,7 +5,7 @@ package indi.jackie.common.constants;
  * @create 2016/7/23
  * @description 项目基础常量
  */
-public class WechatConstants {
+public class WeChatConstants {
     /**
      * 系统常量
      */

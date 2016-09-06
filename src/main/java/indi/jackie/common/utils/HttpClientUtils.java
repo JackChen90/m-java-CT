@@ -7,12 +7,11 @@ package indi.jackie.common.utils;
 //import org.apache.commons.httpclient.methods.GetMethod;
 //import org.apache.commons.httpclient.params.HttpMethodParams;
 
-import indi.jackie.common.constants.WechatConstants;
+import indi.jackie.common.constants.WeChatConstants;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -60,14 +59,14 @@ public class HttpClientUtils {
                 result = EntityUtils.toString(entity, "UTF-8");
             } else {
                 // 请求失败
-                RunLog.getInstance().error("Http return code error", "statusCode=" + statusCode, WechatConstants.SYSTEM_NAME);
+                RunLog.getInstance().error("Http return code error", "statusCode=" + statusCode, WeChatConstants.SYSTEM_NAME);
             }
         } catch (UnsupportedEncodingException e) {
-            RunLog.getInstance().error("Not supported by encoding", "InnerErrorDesc=" + e.getMessage(), WechatConstants.SYSTEM_NAME);
+            RunLog.getInstance().error("Not supported by encoding", "InnerErrorDesc=" + e.getMessage(), WeChatConstants.SYSTEM_NAME);
         } catch (ClientProtocolException e) {
-            RunLog.getInstance().error("Abnormal connection", "InnerErrorDesc=" + e.getMessage(), WechatConstants.SYSTEM_NAME);
+            RunLog.getInstance().error("Abnormal connection", "InnerErrorDesc=" + e.getMessage(), WeChatConstants.SYSTEM_NAME);
         } catch (IOException e) {
-            RunLog.getInstance().error("request failed", "InnerErrorDesc=" + e.getMessage(), WechatConstants.SYSTEM_NAME);
+            RunLog.getInstance().error("request failed", "InnerErrorDesc=" + e.getMessage(), WeChatConstants.SYSTEM_NAME);
         }
         return result;
     }

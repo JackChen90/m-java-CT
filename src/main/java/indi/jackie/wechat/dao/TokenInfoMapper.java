@@ -27,4 +27,12 @@ public interface TokenInfoMapper {
      * @return access token列表
      */
     List<TokenInfo> getTokenInfoList();
+
+    /**
+     * 根据微信号更新access token
+     *
+     * @param tokenInfo
+     * @return
+     */
+    Integer updateByAppCode(TokenInfo tokenInfo);
 }

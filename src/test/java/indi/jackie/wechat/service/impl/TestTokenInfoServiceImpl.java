@@ -6,7 +6,9 @@ package indi.jackie.wechat.service.impl;
  * @description 基础Service测试类
  */
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -14,4 +16,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"file:src/test/resource/spring-test.xml"})
 public class TestTokenInfoServiceImpl {
 
+    @Autowired
+    private BaseService baseService;
+
+    @Test
+    public void testUpdateToken(){
+        baseService.updateAllAccessToken();
+    }
 }

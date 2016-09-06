@@ -1,12 +1,12 @@
 package indi.jackie.wechat.service.impl;
 
 import com.google.gson.Gson;
-import indi.jackie.common.constants.WechatConstants;
+import indi.jackie.common.constants.WeChatConstants;
 import indi.jackie.common.utils.HttpClientUtils;
 import indi.jackie.common.utils.PropertiesUtil;
 import indi.jackie.common.utils.RunLog;
 import indi.jackie.common.utils.StringUtils;
-import indi.jackie.wechat.dao.TokenInfoMapper;
+import indi.jackie.common.wechat.WeChatSQLException;
 import indi.jackie.wechat.dto.TokenInfoDTO;
 import indi.jackie.wechat.entity.TokenInfo;
 import indi.jackie.wechat.service.ITokenInfoService;
@@ -47,7 +47,7 @@ public class BaseService {
     }
 
     @Scheduled(cron = "0 0 0/1 * * ?")
-    public void updateAllAccessToken() {
+    public void updateAllAccessToken() throws WeChatSQLException {
         List<TokenInfo> tokenInfoList = tokenInfoService.getTokenInfoList();
         if (null != tokenInfoList && !tokenInfoList.isEmpty()) {
             for (TokenInfo tokenInfo : tokenInfoList) {
@@ -56,7 +56,7 @@ public class BaseService {
         }
     }
 
-    private void updateAccessToken(TokenInfo tokenInfo) {
+    private void updateAccessToken(TokenInfo tokenInfo) throws WeChatSQLException {
         //应用ID
         String appID = tokenInfo.getAppId();
         //应用密钥
@@ -67,16 +67,13 @@ public class BaseService {
         String tokenMessage = HttpClientUtils.doGet(wechatTokenServerUrl);
         if (!StringUtils.isEmpty(tokenMessage)) {
             if (tokenMessage.contains(ERR_CODE)) {
-                RunLog.getInstance().error("update access token fail ", tokenMessage, WechatConstants.SYSTEM_NAME);
+                RunLog.getInstance().error("get access token from wechat server fail ", tokenMessage, WeChatConstants.SYSTEM_NAME);
             } else {
-                try {
-                    TokenInfoDTO dto = gson.fromJson(tokenMessage, TokenInfoDTO.class);
-                    String accessToken = dto.getAccess_token();
-                    if (!StringUtils.isEmpty(accessToken)) {
-                        tokenInfo.setAccessToken(accessToken);
-                    }
-                } catch (Exception e) {
-                    RunLog.getInstance().error("update access token fail ", tokenMessage, WechatConstants.SYSTEM_NAME);
+                TokenInfoDTO dto = gson.fromJson(tokenMessage, TokenInfoDTO.class);
+                String accessToken = dto.getAccess_token();
+                if (!StringUtils.isEmpty(accessToken)) {
+                    tokenInfo.setAccessToken(accessToken);
+                    tokenInfoService.updateWechatTokenInfo(tokenInfo);
                 }
             }
         }
