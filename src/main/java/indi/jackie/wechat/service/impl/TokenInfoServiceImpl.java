@@ -8,6 +8,7 @@ import indi.jackie.common.wechat.WeChatSQLException;
 import indi.jackie.wechat.dao.TokenInfoMapper;
 import indi.jackie.wechat.entity.TokenInfo;
 import indi.jackie.wechat.service.ITokenInfoService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,17 @@ public class TokenInfoServiceImpl implements ITokenInfoService {
             RunLog.getInstance().error("get access token information list fail ", e.getMessage(), WeChatConstants.SYSTEM_NAME);
             throw new WeChatSQLException(WeChatSQLException.SELECT_ERROR);
         }
+    }
+
+    /**
+     *  根据appID获取access token
+     *
+     * @param appID 微信公众号appID
+     * @return 对应的TokenInfo
+     * @throws WeChatSQLException
+     */
+    @Override
+    public TokenInfo getTokenInfoByAppID(@Param("appID") String appID) throws WeChatSQLException {
+        return null;
     }
 }

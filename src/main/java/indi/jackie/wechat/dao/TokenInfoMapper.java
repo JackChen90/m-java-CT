@@ -1,7 +1,9 @@
 package indi.jackie.wechat.dao;
 
 import indi.jackie.boot.Dao;
+import indi.jackie.common.wechat.WeChatSQLException;
 import indi.jackie.wechat.entity.TokenInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -35,4 +37,12 @@ public interface TokenInfoMapper {
      * @return
      */
     Integer updateByAppCode(TokenInfo tokenInfo);
+
+    /**
+     * 根据appID获取 access token
+     *
+     * @param appID
+     * @return
+     */
+    public TokenInfo getTokenInfoByAppID(String appID);
 }

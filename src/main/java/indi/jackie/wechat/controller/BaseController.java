@@ -7,15 +7,16 @@ import indi.jackie.common.utils.RunLog;
 import indi.jackie.common.wechat.AesException;
 import indi.jackie.common.wechat.SHA1;
 import indi.jackie.wechat.entity.ErrorModel;
+import indi.jackie.wechat.service.impl.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @author jackie chen
@@ -104,8 +105,8 @@ public class BaseController {
 
     @RequestMapping(value = "/", produces = "application/xml;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
-    public String processMessage() {
-
-        return "";
+    public String processMessage(HttpServletRequest request) {
+        String respMessage =BaseService.processWeChatRequest(request);
+        return respMessage;
     }
 }

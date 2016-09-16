@@ -10,4 +10,9 @@ public class WeChatConstants {
      * 系统常量
      */
     public static String SYSTEM_NAME = "M-JAVA-CT";
+
+    /**
+     * UTF-8编码
+     */
+    public static String UTF_8 = "UTF-8";
 }
