@@ -12,7 +12,7 @@ public enum WeChatMsgTypeEnum {
      * <p>
      * 如果要定义自己的方法，在对象序列后加“；”号；
      * Java要求先定义对象序列。
-     * </p>
+     * </p> 
      */
     TEXT("text", 0), IMAGE("image", 1), VOICE("voice", 2), VIDEO("video", 3),
     SHORT_VIDEO("shortvideo", 4);
